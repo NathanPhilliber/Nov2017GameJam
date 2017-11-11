@@ -33,7 +33,7 @@ public class PlayerMovementController : MonoBehaviour {
 
 	public RaycastOrigins raycastOrigins;
 
-	private bool wallJumpReady = false;
+	private int wallJumpReady = 0;
 	private bool grounded = false;
 	private float touchingWallSide = 0;
 
@@ -43,7 +43,7 @@ public class PlayerMovementController : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetButtonDown ("Jump") && velocity.y > -.1f && (currentJumps < maxJumpsInRow || wallJumpReady)) {
+		if (Input.GetButtonDown ("Jump") && velocity.y > -.1f && (currentJumps < maxJumpsInRow || wallJumpReady > 0)) {
 			Jump ();
 		}
 	}
@@ -55,7 +55,7 @@ public class PlayerMovementController : MonoBehaviour {
 	void Jump(){
 		
 		currentJumps++;
-		if (wallJumpReady && !grounded) {
+		if (wallJumpReady > 0 && !grounded) {
 			velocity.x -= springStrengthOffWall*touchingWallSide;
 			velocity.y = jumpSpeedOffWall;
 		} else {
@@ -93,7 +93,7 @@ public class PlayerMovementController : MonoBehaviour {
 		UpdateRaycastOrigins ();
 		ProcessHorizontalCollisions(ref velocity);
 
-		if (wallJumpReady && velocity.y < 0) {
+		if (wallJumpReady > 0 && velocity.y < 0) {
 			velocity.y -= (gravity / 20);
 		} else {
 			
@@ -106,7 +106,9 @@ public class PlayerMovementController : MonoBehaviour {
 	}
 
 	public void ProcessHorizontalCollisions(ref Vector2 velocity){
-		wallJumpReady = false;
+		if (wallJumpReady > 0) {
+			wallJumpReady--;
+		}
 		float directionX = Mathf.Sign (velocity.x);
 		float rayLength = Mathf.Abs (velocity.x) + skinWidth;
 
@@ -121,7 +123,7 @@ public class PlayerMovementController : MonoBehaviour {
 
 			if (hit) {
 				velocity.x = (hit.distance - skinWidth) * directionX;
-				wallJumpReady = true;
+				wallJumpReady = 10;
 				touchingWallSide = directionX;
 			}
 
