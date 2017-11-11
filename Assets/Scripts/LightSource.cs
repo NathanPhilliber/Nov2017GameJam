@@ -17,9 +17,12 @@ public class LightSource : MonoBehaviour {
 
 	public List<GameObject> objectsInRange = new List<GameObject>();
 
+	private PlayerSwitcher switcher;
+
 	void Start () {
 		rangeMin = -(spotlight.spotAngle * .82f) / 100;
 		rangeMax = -rangeMin;
+		switcher = Camera.main.GetComponent<PlayerSwitcher> ();
 			
 	}
 
@@ -42,7 +45,11 @@ public class LightSource : MonoBehaviour {
 			}
 		}
 		for (int i = removeAfter.Count - 1; i >= 0; i--) {
+			if (removeAfter[i].CompareTag ("Player")) {
+				switcher.Switch ();
+			}
 			objectsInRange.Remove(removeAfter[i]);
+
 		}
 	}
 
@@ -59,7 +66,12 @@ public class LightSource : MonoBehaviour {
 		if (hitMin || hitMax) {
 			GameObject obj = hitMin ? hitMin.transform.gameObject : hitMax.transform.gameObject;
 			if (objectsInRange.Contains (obj) == false) {
-				objectsInRange.Add (obj);
+				
+				if (obj.CompareTag ("Player")) {
+					objectsInRange.Add (switcher.Switch ());
+				} else {
+					objectsInRange.Add (obj);
+				}
 			}
 		}
 	}
