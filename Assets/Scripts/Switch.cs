@@ -7,6 +7,8 @@ public class Switch : MonoBehaviour {
 	public GameObject[] objectsToTrigger;
 	public LayerMask mask;
 
+
+
 	private IInteractable[] objects;
 
 	void Start(){

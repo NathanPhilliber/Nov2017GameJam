@@ -8,6 +8,8 @@ public class PlayerSwitcher : MonoBehaviour {
 	public GameObject ninja;
 	public GameObject oldMan;
 
+	public ParticleSystem transitionEffect;
+
 	private int inRanges = 0;
 
 	public GameObject InLight(){
@@ -17,6 +19,10 @@ public class PlayerSwitcher : MonoBehaviour {
 			oldMan.transform.position = ninja.transform.position;
 			oldMan.SetActive (true);
 			attackTargetObject.SetParent (oldMan.transform);
+
+			transitionEffect.gameObject.transform.position = oldMan.transform.position;
+			transitionEffect.Play ();
+
 			return oldMan;
 		}
 		return oldMan;
@@ -29,6 +35,10 @@ public class PlayerSwitcher : MonoBehaviour {
 			ninja.transform.position = oldMan.transform.position;
 			ninja.SetActive (true);
 			attackTargetObject.SetParent (ninja.transform);
+
+			transitionEffect.gameObject.transform.position = ninja.transform.position;
+			transitionEffect.Play ();
+
 			return ninja;
 		}
 		return ninja;

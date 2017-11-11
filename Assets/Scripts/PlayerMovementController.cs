@@ -32,7 +32,8 @@ public class PlayerMovementController : MonoBehaviour {
     private SpriteRenderer playerSpriteRenderer;
 
     private BoxCollider2D collider;
-	private Vector2 velocity;
+	[HideInInspector]
+	public Vector2 velocity;
 
 	public RaycastOrigins raycastOrigins;
 
