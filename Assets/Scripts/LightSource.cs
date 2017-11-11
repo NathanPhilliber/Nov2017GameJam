@@ -6,6 +6,9 @@ public class LightSource : MonoBehaviour {
 
 	public float rayLength;
 
+	public int numRays = 2;
+	private float raySpacing;
+
 	public LayerMask collisionMask;
 
 	[HideInInspector]
@@ -23,6 +26,9 @@ public class LightSource : MonoBehaviour {
 		rangeMin = -(spotlight.spotAngle * .82f) / 100;
 		rangeMax = -rangeMin;
 		switcher = Camera.main.GetComponent<PlayerSwitcher> ();
+
+		float totalAngle = rangeMax - rangeMin;
+		raySpacing = totalAngle / numRays;
 			
 	}
 
@@ -54,25 +60,33 @@ public class LightSource : MonoBehaviour {
 	}
 
 	void RayCheck(){
-		Vector2 minVector = new Vector2 (Mathf.Cos (rangeMin - Mathf.PI / 2), Mathf.Sin (rangeMin - Mathf.PI / 2));
-		Vector2 maxVector = new Vector2 (Mathf.Cos (rangeMax - Mathf.PI / 2), Mathf.Sin (rangeMax - Mathf.PI / 2));
 
-		Debug.DrawRay (transform.position, minVector*rayLength, Color.yellow);
-		Debug.DrawRay (transform.position, maxVector*rayLength, Color.yellow);
+		for (float i = rangeMin; i <= rangeMax; i += raySpacing) {
+			Vector2 vector = new Vector2 (Mathf.Cos (i - Mathf.PI / 2), Mathf.Sin (i - Mathf.PI / 2));
 
-		RaycastHit2D hitMin = Physics2D.Raycast (transform.position, minVector, rayLength, collisionMask);
-		RaycastHit2D hitMax = Physics2D.Raycast (transform.position, maxVector, rayLength, collisionMask);
 
-		if (hitMin || hitMax) {
-			GameObject obj = hitMin ? hitMin.transform.gameObject : hitMax.transform.gameObject;
-			if (objectsInRange.Contains (obj) == false) {
-				
-				if (obj.CompareTag ("Player")) {
-					objectsInRange.Add (switcher.Switch ());
-				} else {
-					objectsInRange.Add (obj);
+			Debug.DrawRay (transform.position, vector*rayLength, Color.yellow);
+
+
+			RaycastHit2D hit = Physics2D.Raycast (transform.position, vector, rayLength, collisionMask);
+
+			if (hit) {
+				GameObject obj = hit.transform.gameObject;
+				if (objectsInRange.Contains (obj) == false) {
+
+					if (obj.CompareTag ("Player")) {
+						objectsInRange.Add (switcher.Switch ());
+					} else {
+						objectsInRange.Add (obj);
+					}
 				}
 			}
 		}
+
+
+
+
+
+
 	}
 }
