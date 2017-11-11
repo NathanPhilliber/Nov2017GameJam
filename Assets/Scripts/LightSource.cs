@@ -20,7 +20,10 @@ public class LightSource : MonoBehaviour {
 
 	public List<GameObject> objectsInRange = new List<GameObject>();
 
-	private PlayerSwitcher switcher;
+	[HideInInspector]
+	public PlayerSwitcher switcher;
+
+	public bool active = true;
 
 	void Start () {
 		rangeMin = -(spotlight.spotAngle * .82f) / 100;
@@ -34,8 +37,10 @@ public class LightSource : MonoBehaviour {
 
 	void Update () {
 
-		RayCheck ();
-		PrecisionCheckInRange ();
+		if (active) {
+			RayCheck ();
+			PrecisionCheckInRange ();
+		}
 			
 	}
 
@@ -64,9 +69,7 @@ public class LightSource : MonoBehaviour {
 		for (float i = rangeMin; i <= rangeMax; i += raySpacing) {
 			Vector2 vector = new Vector2 (Mathf.Cos (i - Mathf.PI / 2), Mathf.Sin (i - Mathf.PI / 2));
 
-
 			Debug.DrawRay (transform.position, vector*rayLength, Color.yellow);
-
 
 			RaycastHit2D hit = Physics2D.Raycast (transform.position, vector, rayLength, collisionMask);
 
@@ -82,11 +85,7 @@ public class LightSource : MonoBehaviour {
 				}
 			}
 		}
-
-
-
-
-
-
 	}
+
+
 }
