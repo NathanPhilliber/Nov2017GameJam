@@ -8,6 +8,8 @@ public class PlayerMovementController : MonoBehaviour {
 	public float moveDeceleration;
 	public float maxMoveSpeed;
 	public float jumpSpeed;
+	public float jumpSpeedOffWall;
+	public float springStrengthOffWall;
 	public float gravity;
 	public float maxJumpHeight;
 
@@ -31,13 +33,17 @@ public class PlayerMovementController : MonoBehaviour {
 
 	public RaycastOrigins raycastOrigins;
 
+	private bool wallJumpReady = false;
+	private bool grounded = false;
+	private float touchingWallSide = 0;
+
 	void Start(){
 		collider = GetComponent<BoxCollider2D> ();
 		CalculateRaySpacing();
 	}
 
 	void Update(){
-		if (Input.GetButtonDown ("Jump") && currentJumps < maxJumpsInRow) {
+		if (Input.GetButtonDown ("Jump") && velocity.y > -.1f && (currentJumps < maxJumpsInRow || wallJumpReady)) {
 			Jump ();
 		}
 	}
@@ -47,8 +53,14 @@ public class PlayerMovementController : MonoBehaviour {
 	}
 
 	void Jump(){
-		velocity.y = jumpSpeed;
+		
 		currentJumps++;
+		if (wallJumpReady && !grounded) {
+			velocity.x -= springStrengthOffWall*touchingWallSide;
+			velocity.y = jumpSpeedOffWall;
+		} else {
+			velocity.y = jumpSpeed;
+		}
 	}
 
 	void MoveUpdate(){
@@ -72,20 +84,29 @@ public class PlayerMovementController : MonoBehaviour {
 			}
 			//Cap move speed
 			if (Mathf.Abs (velocity.x) > maxMoveSpeed) {
-				velocity.x = moveDir * maxMoveSpeed;
+				velocity.x = Mathf.Sign(velocity.x) * maxMoveSpeed;
 			}
 		}
 
 		// Vertical Movement
-		velocity.y -= gravity;
+
 		UpdateRaycastOrigins ();
 		ProcessHorizontalCollisions(ref velocity);
+
+		if (wallJumpReady && velocity.y < 0) {
+			velocity.y -= (gravity / 20);
+		} else {
+			
+			velocity.y -= gravity;
+		}
+
 		ProcessVerticalCollisions(ref velocity);
 
 		transform.Translate (velocity);
 	}
 
 	public void ProcessHorizontalCollisions(ref Vector2 velocity){
+		wallJumpReady = false;
 		float directionX = Mathf.Sign (velocity.x);
 		float rayLength = Mathf.Abs (velocity.x) + skinWidth;
 
@@ -100,12 +121,15 @@ public class PlayerMovementController : MonoBehaviour {
 
 			if (hit) {
 				velocity.x = (hit.distance - skinWidth) * directionX;
+				wallJumpReady = true;
+				touchingWallSide = directionX;
 			}
 
 		}
 	}
 
 	public void ProcessVerticalCollisions(ref Vector2 velocity){
+		grounded = false;
 		float directionY = Mathf.Sign (velocity.y);
 		float rayLength = Mathf.Abs (velocity.y) + skinWidth;
 		for (int i = 0; i < verticalRayCount; i++) {
@@ -117,6 +141,7 @@ public class PlayerMovementController : MonoBehaviour {
 			Debug.DrawRay (rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
 			if (hit) {
+				grounded = true;
 				if (velocity.y < 0) {
 					currentJumps = 0;
 				}
