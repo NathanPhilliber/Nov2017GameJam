@@ -34,7 +34,7 @@ public class LampBehavior : MonoBehaviour, IInteractable {
 		lightSource.active = false;
 		foreach (GameObject obj in lightSource.objectsInRange) {
 			if (obj.CompareTag ("Player")) {
-				lightSource.switcher.Switch ();
+				lightSource.switcher.ExitLight ();
 			}
 		}
 	}

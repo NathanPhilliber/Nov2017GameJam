@@ -57,7 +57,7 @@ public class LightSource : MonoBehaviour {
 		}
 		for (int i = removeAfter.Count - 1; i >= 0; i--) {
 			if (removeAfter[i].CompareTag ("Player")) {
-				switcher.Switch ();
+				switcher.ExitLight ();
 			}
 			objectsInRange.Remove(removeAfter[i]);
 
@@ -78,7 +78,7 @@ public class LightSource : MonoBehaviour {
 				if (objectsInRange.Contains (obj) == false) {
 
 					if (obj.CompareTag ("Player")) {
-						objectsInRange.Add (switcher.Switch ());
+						objectsInRange.Add (switcher.InLight ());
 					} else {
 						objectsInRange.Add (obj);
 					}

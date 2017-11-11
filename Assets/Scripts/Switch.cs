@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class Switch : MonoBehaviour {
 
-	public IInteractable[] objectsToTrigger;
+	public GameObject[] objectsToTrigger;
 	public LayerMask mask;
+
+	private IInteractable[] objects;
+
+	void Start(){
+		objects = new IInteractable[objectsToTrigger.Length];
+		for (int i = 0; i < objectsToTrigger.Length; i++) {
+			objects [i] = objectsToTrigger [i].GetComponent<IInteractable> ();
+		}
+	}
 
 	public void ProcessInteracts(GameObject other){
 		if (mask == (mask | (1 << other.layer))) {
-			for (int i = 0; i < objectsToTrigger.Length; i++) {
-				objectsToTrigger [i].TriggerAction ();
+			for (int i = 0; i < objects.Length; i++) {
+				objects [i].TriggerAction ();
 			}
 
 		}
