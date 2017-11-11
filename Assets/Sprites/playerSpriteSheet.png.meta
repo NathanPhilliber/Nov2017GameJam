@@ -1,0 +1,310 @@
+fileFormatVersion: 2
+guid: a758571d52018db46a3a152be3d128a0
+timeCreated: 1510434328
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: playerSpriteSheet_0
+    21300002: playerSpriteSheet_1
+    21300004: playerSpriteSheet_2
+    21300006: playerSpriteSheet_3
+    21300008: playerSpriteSheet_4
+    21300010: playerSpriteSheet_5
+    21300012: playerSpriteSheet_6
+    21300014: playerSpriteSheet_7
+    21300016: playerSpriteSheet_8
+    21300018: playerSpriteSheet_9
+    21300020: playerSpriteSheet_10
+    21300022: playerSpriteSheet_11
+    21300024: playerSpriteSheet_12
+    21300026: playerSpriteSheet_13
+    21300028: playerSpriteSheet_14
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: playerSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 810
+        width: 68
+        height: 103
+      alignment: 9
+      pivot: {x: 0.48543504, y: 0.0047921487}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 810
+        width: 68
+        height: 99
+      alignment: 9
+      pivot: {x: 0.5, y: -0.00020961568}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 811
+        width: 66
+        height: 98
+      alignment: 9
+      pivot: {x: 0.5, y: 0.00029147402}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 698
+        width: 46
+        height: 90
+      alignment: 9
+      pivot: {x: 0.5000002, y: -0.0052612303}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 700
+        width: 46
+        height: 89
+      alignment: 9
+      pivot: {x: 0.48310187, y: 0.0021629762}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 700
+        width: 38
+        height: 86
+      alignment: 9
+      pivot: {x: 0.5, y: -0.0016451104}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 700
+        width: 29
+        height: 85
+      alignment: 9
+      pivot: {x: 0.51340246, y: 0.006170295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 700
+        width: 29
+        height: 84
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0002913702}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 700
+        width: 37
+        height: 86
+      alignment: 9
+      pivot: {x: 0.48949617, y: 0.0073930607}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 586
+        width: 46
+        height: 90
+      alignment: 9
+      pivot: {x: 0.5000002, y: 0.0033759223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 588
+        width: 46
+        height: 89
+      alignment: 9
+      pivot: {x: 0.49155095, y: 0.0021629762}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 588
+        width: 38
+        height: 86
+      alignment: 9
+      pivot: {x: 0.4897722, y: -0.0016451104}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_12
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 588
+        width: 29
+        height: 85
+      alignment: 9
+      pivot: {x: 0.5, y: -0.0019574333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_13
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 588
+        width: 29
+        height: 84
+      alignment: 9
+      pivot: {x: 0.49019122, y: -0.004547119}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerSpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 586
+        width: 37
+        height: 86
+      alignment: 9
+      pivot: {x: 0.49231204, y: -0.00604319}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

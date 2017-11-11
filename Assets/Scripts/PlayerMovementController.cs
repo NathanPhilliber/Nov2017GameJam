@@ -28,7 +28,10 @@ public class PlayerMovementController : MonoBehaviour {
 	[HideInInspector]
 	public float verticalRaySpacing;
 
-	private BoxCollider2D collider;
+    private Animator animator;
+    private SpriteRenderer playerSpriteRenderer;
+
+    private BoxCollider2D collider;
 	private Vector2 velocity;
 
 	public RaycastOrigins raycastOrigins;
@@ -37,9 +40,12 @@ public class PlayerMovementController : MonoBehaviour {
 	private bool grounded = false;
 	private float touchingWallSide = 0;
 
-	void Start(){
+
+    void Start(){
 		collider = GetComponent<BoxCollider2D> ();
-		CalculateRaySpacing();
+        animator = GetComponent<Animator>();
+        playerSpriteRenderer = playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        CalculateRaySpacing();
 	}
 
 	void Update(){
@@ -73,7 +79,8 @@ public class PlayerMovementController : MonoBehaviour {
 			if (Mathf.Sign (velocity.x) != Mathf.Sign (oldX)) {
 				velocity.x = 0;
 			}
-		} else { // Process acceleration on horizontal
+            animator.SetInteger("playerState", 0);
+        } else { // Process acceleration on horizontal
 			//If we switch directions, give extra help to slow down faster
 			if (Mathf.Sign (velocity.x) != moveDir) {
 				velocity.x += moveDir * moveDeceleration;
@@ -86,6 +93,12 @@ public class PlayerMovementController : MonoBehaviour {
 			if (Mathf.Abs (velocity.x) > maxMoveSpeed) {
 				velocity.x = Mathf.Sign(velocity.x) * maxMoveSpeed;
 			}
+            if (velocity.x < 0) {
+                playerSpriteRenderer.flipX = true;
+            } else {
+                playerSpriteRenderer.flipX = false;
+            }
+            animator.SetInteger("playerState", 1);
 		}
 
 		// Vertical Movement
