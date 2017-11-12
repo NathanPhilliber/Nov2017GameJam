@@ -16,6 +16,10 @@ namespace UnityStandardAssets._2D
         private Vector3 m_CurrentVelocity;
         private Vector3 m_LookAheadPos;
 
+		public float shakeAmount;
+		public float shakeDelta;
+		private float curShake = 0;
+
         // Use this for initialization
         private void Start()
         {
@@ -23,6 +27,11 @@ namespace UnityStandardAssets._2D
             m_OffsetZ = (transform.position - target.position).z;
             transform.parent = null;
         }
+
+		public void Shake(){
+			curShake = shakeAmount;
+			print ("shake");
+		}
 
 
         // Update is called once per frame
@@ -44,9 +53,15 @@ namespace UnityStandardAssets._2D
 
             Vector3 aheadTargetPos = target.position + m_LookAheadPos + Vector3.forward*m_OffsetZ;
             Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref m_CurrentVelocity, damping);
-			newPos = new Vector3 (newPos.x, target.position.y + (newPos.y-target.position.y)/2, newPos.z);
+			newPos = new Vector3 (newPos.x + Mathf.Sin(Time.frameCount) * curShake, 
+				target.position.y + (newPos.y-target.position.y)/2 + Mathf.Sin(Time.frameCount) * curShake, newPos.z);
             transform.position = newPos;
-
+			if (curShake > 0) {
+				curShake -= shakeDelta;
+				if (curShake < 0) {
+					curShake = 0;
+				}
+			}
 
             m_LastTargetPosition = target.position;
         }

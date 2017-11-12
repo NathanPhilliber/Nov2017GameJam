@@ -10,9 +10,9 @@ public class Health : MonoBehaviour {
 
 	private Mortal deathAction;
 
-	public void ChangeHealth(float pts){
+	public void ChangeHealth(float pts, Vector2 origin){
 		health += pts;
-		deathAction.OnHit ();
+		deathAction.OnHit (origin);
 		if (health > maxHealth) {
 			health = maxHealth;
 		}
@@ -35,5 +35,5 @@ public class Health : MonoBehaviour {
 
 public interface Mortal{
 	void OnDeath();
-	void OnHit();
+	void OnHit(Vector2 position);
 }

@@ -32,13 +32,16 @@ public class EnemyMovementController : MonoBehaviour {
 	public float verticalRaySpacing;
 
 	private BoxCollider2D collider;
-	private Vector2 velocity;
+	[HideInInspector]
+	public Vector2 velocity;
 
 	public RaycastOrigins raycastOrigins;
 
 	private int wallJumpReady = 0;
 	private bool grounded = false;
 	private float touchingWallSide = 0;
+
+	public int stopMovingFrames = 0;
 
 	void Start(){
 		collider = GetComponent<BoxCollider2D> ();
@@ -78,25 +81,29 @@ public class EnemyMovementController : MonoBehaviour {
 		float targetDelta = attackTarget.position.x - transform.position.x;
 
 		float moveDir = Mathf.Abs(targetDelta) > ignoreTargetDistance ? 0 : Mathf.Sign(targetDelta);
-		if (moveDir == 0) { // Process deceleration on horizontal
-			float oldX = velocity.x;
-			velocity.x -= (Mathf.Sign (velocity.x) * moveDeceleration);
-			if (Mathf.Sign (velocity.x) != Mathf.Sign (oldX)) {
-				velocity.x = 0;
+		if (stopMovingFrames <= 0) {
+			if (moveDir == 0) { // Process deceleration on horizontal
+				float oldX = velocity.x;
+				velocity.x -= (Mathf.Sign (velocity.x) * moveDeceleration);
+				if (Mathf.Sign (velocity.x) != Mathf.Sign (oldX)) {
+					velocity.x = 0;
+				}
+			} else { // Process acceleration on horizontal
+				//If we switch directions, give extra help to slow down faster
+				if (Mathf.Sign (velocity.x) != moveDir) {
+					velocity.x += moveDir * moveDeceleration;
+				}
+				// Move acceleration
+				if (Mathf.Abs (velocity.y) < horizontalAirMovementThreshold) {
+					velocity.x += moveDir * moveAcceleration;
+				}
+				//Cap move speed
+				if (Mathf.Abs (velocity.x) > maxMoveSpeed) {
+					velocity.x = Mathf.Sign (velocity.x) * maxMoveSpeed;
+				}
 			}
-		} else { // Process acceleration on horizontal
-			//If we switch directions, give extra help to slow down faster
-			if (Mathf.Sign (velocity.x) != moveDir) {
-				velocity.x += moveDir * moveDeceleration;
-			}
-			// Move acceleration
-			if (Mathf.Abs (velocity.y) < horizontalAirMovementThreshold) {
-				velocity.x += moveDir * moveAcceleration;
-			}
-			//Cap move speed
-			if (Mathf.Abs (velocity.x) > maxMoveSpeed) {
-				velocity.x = Mathf.Sign(velocity.x) * maxMoveSpeed;
-			}
+		} else {
+			stopMovingFrames--;
 		}
 
 		// Vertical Movement

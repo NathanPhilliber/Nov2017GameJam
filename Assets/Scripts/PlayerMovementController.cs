@@ -52,22 +52,32 @@ public class PlayerMovementController : MonoBehaviour {
         CalculateRaySpacing();
 	}
 
+	private int attackWarmup = 0;
+
 	void Update(){
 		if (Input.GetButtonDown ("Jump") && velocity.y > -.1f && (currentJumps < maxJumpsInRow || wallJumpReady > 0)) {
 			Jump ();
 		}
 		if (Input.GetButtonDown ("Fire1")) {
 			animator.SetInteger("playerState", 2);
-			if (facingRight) {
-				rightHitBox.SetActive (true);
-			} else {
-				leftHitBox.SetActive (true);
-			}
+			attackWarmup = 1;
 		}
 	}
 
 	void FixedUpdate(){
 		MoveUpdate ();
+
+		if (attackWarmup > 0) {
+			attackWarmup++;
+			if (attackWarmup == 10) {
+				attackWarmup = 0;
+				if (facingRight) {
+					rightHitBox.SetActive (true);
+				} else {
+					leftHitBox.SetActive (true);
+				}
+			}
+		}
 	}
 
 	void Jump(){

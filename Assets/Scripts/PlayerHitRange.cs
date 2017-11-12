@@ -21,7 +21,7 @@ public class PlayerHitRange : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (hitMask == (hitMask | (1 << other.gameObject.layer))) {
-			other.GetComponent<Health> ().ChangeHealth (-damage);
+			other.GetComponent<Health> ().ChangeHealth (-damage, animator.gameObject.transform.position);
 
 		}
 
