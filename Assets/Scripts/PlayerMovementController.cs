@@ -45,13 +45,16 @@ public class PlayerMovementController : MonoBehaviour {
     void Start(){
 		collider = GetComponent<BoxCollider2D> ();
         animator = GetComponent<Animator>();
-        playerSpriteRenderer = playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
         CalculateRaySpacing();
 	}
 
 	void Update(){
 		if (Input.GetButtonDown ("Jump") && velocity.y > -.1f && (currentJumps < maxJumpsInRow || wallJumpReady > 0)) {
 			Jump ();
+		}
+		if (Input.GetButtonDown ("Fire1")) {
+			animator.SetInteger("playerState", 2);
 		}
 	}
 
@@ -99,7 +102,11 @@ public class PlayerMovementController : MonoBehaviour {
             } else {
                 playerSpriteRenderer.flipX = false;
             }
-            animator.SetInteger("playerState", 1);
+			if (Mathf.Abs (velocity.y) < .01) {
+				animator.SetInteger ("playerState", 1);
+			} else if (animator.GetInteger ("playerState") == 1) {
+				animator.SetInteger ("playerState", 0);
+			}
 		}
 
 		// Vertical Movement
