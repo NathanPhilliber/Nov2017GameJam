@@ -30,7 +30,7 @@ namespace UnityStandardAssets._2D
 
 		public void Shake(){
 			curShake = shakeAmount;
-			print ("shake");
+
 		}
 
 

@@ -18,12 +18,14 @@ public class Switch : MonoBehaviour {
 		}
 	}
 
-	public void ProcessInteracts(GameObject other){
-		if (mask == (mask | (1 << other.layer))) {
+	public void ProcessInteracts(){
+		
 			for (int i = 0; i < objects.Length; i++) {
 				objects [i].TriggerAction ();
 			}
 
-		}
+
 	}
+
+
 }

@@ -8,11 +8,11 @@ public class PlayerDeath : MonoBehaviour, Mortal {
 
 	public void OnDeath(){
 		//Destroy (gameObject);
-		print("PLAYER DIED");
+		//print("PLAYER DIED");
 	}
 
 	public void OnHit(Vector2 origin){
-		print ("PLAYER HIT");
+		//print ("PLAYER HIT");
 		camera.Shake ();
 	}
 }
