@@ -41,6 +41,9 @@ public class PlayerMovementController : MonoBehaviour {
 	private bool grounded = false;
 	private float touchingWallSide = 0;
 
+	private bool facingRight = true;
+
+	public GameObject leftHitBox, rightHitBox;
 
     void Start(){
 		collider = GetComponent<BoxCollider2D> ();
@@ -55,6 +58,11 @@ public class PlayerMovementController : MonoBehaviour {
 		}
 		if (Input.GetButtonDown ("Fire1")) {
 			animator.SetInteger("playerState", 2);
+			if (facingRight) {
+				rightHitBox.SetActive (true);
+			} else {
+				leftHitBox.SetActive (true);
+			}
 		}
 	}
 
@@ -99,10 +107,12 @@ public class PlayerMovementController : MonoBehaviour {
 			}
             if (velocity.x < 0) {
                 playerSpriteRenderer.flipX = true;
+				facingRight = false;
             } else {
                 playerSpriteRenderer.flipX = false;
+				facingRight = true;
             }
-			if (Mathf.Abs (velocity.y) < .01) {
+			if (Mathf.Abs (velocity.y) < .01 && animator.GetInteger ("playerState") != 2) { // Source of replay bug
 				animator.SetInteger ("playerState", 1);
 			} else if (animator.GetInteger ("playerState") == 1) {
 				animator.SetInteger ("playerState", 0);

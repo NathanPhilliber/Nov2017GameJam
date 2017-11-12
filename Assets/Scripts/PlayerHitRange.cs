@@ -7,6 +7,17 @@ public class PlayerHitRange : MonoBehaviour {
 	public LayerMask hitMask;
 
 	public float damage;
+	public int attackFrames;
+	private int timeLeft;
+
+	public Animator animator;
+
+
+
+	void OnEnable(){
+		timeLeft = attackFrames;
+
+	}
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (hitMask == (hitMask | (1 << other.gameObject.layer))) {
@@ -16,13 +27,12 @@ public class PlayerHitRange : MonoBehaviour {
 
 	}
 
-	// Use this for initialization
-	void Start () {
-		
+	void FixedUpdate(){
+		if (--timeLeft <= 0) {
+			animator.SetInteger ("playerState", 0);
+			gameObject.SetActive (false);
+
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }
